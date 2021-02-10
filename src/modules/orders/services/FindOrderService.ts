@@ -24,8 +24,6 @@ class FindOrderService {
 
   public async execute({ id }: IRequest): Promise<Order | undefined> {
     const order = await this.ordersRepository.findById(id);
-
-    console.log(order);
     return order;
   }
 }

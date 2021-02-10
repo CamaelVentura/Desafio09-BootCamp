@@ -14,24 +14,21 @@ import Product from '@modules/products/infra/typeorm/entities/Product';
 
 @Entity('orders_products')
 class OrdersProducts {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Order, order => order.id)
+  @ManyToOne(() => Order, order => order.order_products)
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToMany(() => Product, product => product.id, {
-    eager: true,
-    cascade: true,
-  })
+  @ManyToOne(() => Product, product => product.order_products)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @Column('uuid')
+  @Column()
   product_id: string;
 
-  @Column('uuid')
+  @Column()
   order_id: string;
 
   @Column('decimal')
